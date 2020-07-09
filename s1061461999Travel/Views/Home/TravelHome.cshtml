@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewBag.Title = "TravelHome";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+}
+
+<div class="container">
+  
+        <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                         <img src="~/Images/高雄.jpg" class="d-block w-100" alt="..." > 
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>高雄市</h5>
+                            <p>臺灣六都之一。面積達2952平方公里；設籍人口277.3萬人，在臺灣直轄市與縣市中人口數排名第三。</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Images/金門.jpg" class="d-block w-100" alt="..." > 
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>金門</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                         <img src="~/Images/馬祖.jpg"class="d-block w-100" alt="...">  
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>馬祖列島</h5>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                         
+                        <img src="~/Images/台南.jpg"class="d-block w-100" alt="...">   
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>台南</h5>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+   
+    <hr/>
+    <div class="row">
+        <div class="col-12 col-sm-8 col-md-8">
+            <div class="accordion" id="accordionExample">
+                <div class="card border-info text-info">
+                    <div class="card-header bg-info" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h3 class="text-white">北台灣</h3>
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-12 col-md-3">
+                                         
+                                     <img src="~/Images/台北市立動物園.jpg"class="img-fluid"  /> 
+                                        <h5 class="list-group-item-heading text-center">台北101-1</h5>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <span class="badge badge-info">Address</span>
+                                        11656台北市文山區新光路二段30號
+                                        <span class="badge badge-primary">Tel</span>
+                                        02-29382300
+                                        <p>
+                                            臺北市立動物園是中華民國臺北市的一座公立動物園，隸屬於臺北市政府教育局。
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-12 col-md-3">
+                                         
+                                        <img src="~/Images/中正紀念堂.jpg"class="img-fluid" /> 
+                                        <h5 class="list-group-item-heading text-center">中正紀念堂</h5>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <span class="badge badge-info">Address</span>
+                                        100台北市中正區中山南路21號
+                                        <span class="badge badge-primary">Tel</span>
+                                        02-2343-1100
+                                        <p>
+                                            中正紀念堂是為紀念已故前中華民國總統蔣中正而興建的建築
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-12 col-md-3">
+                                         
+                                        <img src="~/Images/國父紀念館.jpg" class="img-fluid"/> 
+                                        <h5 class="list-group-item-heading text-center">國立國父紀念館</h5>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <span class="badge badge-info">Address</span>
+                                        11073臺北市信義區仁愛路四段505號
+                                        <span class="badge badge-primary">Tel</span>
+                                        (02)2758-8008
+                                        <p>
+                                            國立國父紀念館是位於臺灣臺北東區的綜合性文化紀念設施，係紀念中華民國國父孫中山百年誕辰而興建，於1972年5月16日落成啟用，館區總面積達三萬五千坪。除了具紀念功能外，建築本體周圍則是戶外運動、休閒、藝文與知性活動的綜合性休憩公園。臺北市文資審議委員會2018年12月28日審議國父紀念館文資價值，通過指定為古蹟。
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="card border-primary text-primary">
+                    <div class="card-header bg-primary" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" 
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <h3 class="text-white">中台灣</h3>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-12 col-md-3">
+                                         
+                                        <img src="~/Images/太魯閣國家公園.jpg" class="img-fluid"  /> 
+                                        <h5 class="list-group-item-heading text-center">日月潭</h5>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <span class="badge badge-primary">Address</span>
+                                        972花蓮縣秀林鄉富世291號
+                                        <span class="badge badge-warning">Tel</span>
+                                        03-862-1100
+                                        <p>
+                                            太魯閣國家公園是台灣第四座成立的國家公園，前身為日治時期成立之次高太魯閣國立公園。第二次世界大戰後為國家級風景區
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-12 col-md-3">
+                                         
+                                        <img src="~/Images/武陵農場.jpg"class="img-fluid"  /> 
+                                        <h5 class="list-group-item-heading text-center">武陵農場</h5>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <span class="badge badge-primary">Address</span>
+                                        424台中市和平區平等里武陵路3-1號
+                                        <span class="badge badge-warning">Tel</span>
+                                        04-25901355
+                                        <p>
+                                            武陵農場位於台灣台中市和平區平等里，是親近雪霸國家公園的重要遊憩據點，海拔1750公尺至2200公尺，為中華民國國軍退除役官兵輔導委員會所經營之公有事業。與清境農場、福壽山農場合稱為台灣三大高山農場。
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card border-danger text-danger">
+                    <div class="card-header bg-danger" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" 
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <h3 class="text-white">東台灣</h3>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4 col-md-4">
+            <div class="card">
+                 
+                <img src="~/Images/南海.jpg"class="card-img-top" alt="南海" />ng" >
+                <div class="card-body">
+                    <h5 class="card-title">南海</h5>
+                    <p class="card-text">
+                        南海，又稱為南中國海、中國南海，是位於東南亞的陸緣海，被中國大陸、台灣島、菲律賓群島、馬來群島及中南半島所環繞，為西太平洋的一部分。 南海海域面積有350萬平方公里，其中有超過200個無原住民居住的島嶼和岩礁，這些島礁被合稱為南海諸島。除了是主要的海上運輸航線外，南海還蘊藏著豐富的石油和天然氣
+                    </p>
+                    <a href="#" class="btn btn-primary">前往南海</a>
+                </div>
+            </div>
+            <div class="card">
+                 
+                <img src="~/Images/吉貝嶼.jpg"class="btn btn-primary"alt="日月潭"/>
+                <div class="card-body">
+                    <h5 class="card-title">吉貝</h5>
+                    <p class="card-text">
+                        吉貝嶼是澎湖群島北海地區最大島嶼。吉貝古定名為嘉貝，因島嶼形狀宛如一枚螺貝漂浮在海面上，因此先民稱呼這個島嶼為「嘉貝嶼」，後期以諧音改名為「吉貝」。行政區屬澎湖縣白沙鄉。
+                    </p>
+                    <a href="#" class="btn btn-primary">前往吉貝嶼</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

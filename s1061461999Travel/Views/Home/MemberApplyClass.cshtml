@@ -1,0 +1,57 @@
+﻿@model s1061461999Travel.Models.Member
+@{
+    ViewBag.Title = "MemberApplyClass";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+}
+
+<div class="container">
+    <h2>註冊資料如下:</h2>
+    <table class="table table-condensed">
+        <tr>
+            <td>帳號:</td>
+            <td>
+                @Model.Account
+            </td>
+        </tr>
+        <tr>
+            <td>密碼:</td>
+            <td>
+                @Model.Password
+            </td>
+        </tr>
+        <tr>
+            <td>姓名:</td>
+            <td>
+                @Model.Name
+            </td>
+        </tr>
+        <tr>
+            <td>email:</td>
+            <td>
+                @Model.Email
+            </td>
+        </tr>
+        <tr>
+            <td>手機:</td>
+            <td>
+                @Model.Phone
+            </td>
+        </tr>
+        <tr>
+            <td>學歷</td>
+            <td>
+                @Model.Edu
+            </td>
+        </tr>
+        <tr>
+            <td>興趣</td>
+            <td>
+                @foreach (var data in Model.Interest)
+                {
+                    <span>@data</span>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
+

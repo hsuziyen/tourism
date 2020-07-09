@@ -1,0 +1,161 @@
+﻿@model s1061461999Travel.Models.Book
+@{
+    ViewBag.Title = "Book";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+    bool dataFlag = false;
+    dataFlag = !string.IsNullOrEmpty(ViewBag.ISBN);
+}
+@helper GetDateTimeLocal(DateTime dt) { 
+int month = int.Parse(dt.Month.ToString());
+string sMonth = month > 9 ? "" + month : "0" + month;
+int day = int.Parse(dt.Day.ToString());
+string sDay = day > 9 ? "" + day : "0" + day;
+string sdate = dt.Year + "-" + sMonth + "-" + sDay;
+string sTime = sdate + "T" + (dt.Hour > 9 ? "" + dt.Hour : "0" + dt.Hour) + ":"
+    + (dt.Minute > 9 ? "" + dt.Minute : "0" + dt.Minute);
+    @sTime
+    }
+
+<div class="container text-muted text-center">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center">圖書推薦<span class="text-danger mx-3">@TempData["Msg"]</span></h2>
+            @using (Html.BeginForm("Book", "Home", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.ISBN, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.ISBN, new { @class = "form-control",
+                       @placeholder = "請輸入ISBN" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.ISBN,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Name, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control",
+                       @placeholder = "請輸入書名" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Name,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Author, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Author, new { @class = "form-control",
+                       @placeholder = "請輸入作者" })
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Company, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Company, new { @class = "form-control",
+                       @placeholder = "請輸入圖書公司" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Company,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Publish, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Publish, new { @class = "form-control",
+                       type="datetime-local",@Value=GetDateTimeLocal(DateTime.Now) })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Publish,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Price, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control",
+                       @placeholder = "請輸入定價" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Price,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("Image", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBox("Image",string.Empty,  new { @class = "form-control",
+                       type="file" })
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Description, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control",
+                       rows="6" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Description,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-left">
+                        <input type="submit" class="btn btn-outline-primary" value="送出">
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @if (dataFlag)
+    {
+        DateTime publish = (DateTime)Model.Publish;
+        <div class="col-md-8 offset-md-2">
+            <div class="card mb-3 w-100">
+                <img src="~/Images/Upload/@Model.Image" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text text-left">
+                        @Html.Raw(@Model.Description.Replace(Environment.NewLine, "<br/>"))
+                    </p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+                <div class="card-footer text-muted text-left">
+                    <h5>作者:@Model.Author</h5>
+                    <h5>出版社:@Model.Company</h5>
+                    <h5>出版日期:@publish.ToShortDateString()</h5>
+                    <h5>定價:@Model.Price</h5>
+                    <h5>ISBN:@Model.ISBN</h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

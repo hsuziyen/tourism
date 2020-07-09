@@ -1,0 +1,81 @@
+﻿@model s1061461999Travel.Models.User
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+}
+
+<div class="container text-center text-muted">
+    <h2>帳號申請</h2>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            @using (Html.BeginForm("Register", "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Account, new { @class = "form-control-plaintext col-sm-2" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Account, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Account,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Password, new { @class = "form-control-plaintext col-sm-2" })
+                    <div class="col-sm-8">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Password,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Email, new { @class = "form-control-plaintext col-sm-2" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Email,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Name, new { @class = "form-control-plaintext col-sm-2" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Name,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-left">
+                        <input type="submit" class="btn btn-outline-primary" value="送出">
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+

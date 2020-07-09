@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TravelDBModelStoreContainer" CdmEntityContainer="TravelDBEntities">
+    <EntitySetMapping Name="Areas">
+      <EntityTypeMapping TypeName="TravelDBModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="TravelDBModel.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SpotId" ColumnName="SpotId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Spots">
+      <EntityTypeMapping TypeName="TravelDBModel.Spot">
+        <MappingFragment StoreEntitySet="Spot">
+          <ScalarProperty Name="SpotId" ColumnName="SpotId" />
+          <ScalarProperty Name="SpotName" ColumnName="SpotName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

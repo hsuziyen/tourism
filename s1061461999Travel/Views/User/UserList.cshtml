@@ -1,0 +1,43 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model  IPagedList<s1061461999Travel.Models.User>
+@{
+    ViewBag.Title = "UserList";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+    int i = 0;
+}
+@section style{
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+}
+
+<div class="container text-muted">
+    <h2 class="text-center">會員資料</h2>
+    <table class="table table-condensed table-striped">
+        <tr>
+            <th>編號</th>
+            <th>帳號</th>
+            <th>密碼</th>
+            <th>姓名</th>
+            <th>Email</th>
+            <th>身份</th>
+            <th>啟用</th>
+        </tr>
+        @foreach (var data in Model)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>@data.Account</td>
+                <td>@data.Password</td>
+                <td>@data.Name</td>
+                <td>@data.Email</td>
+                <td>@data.Role.RoleName</td>
+                <td>@data.Enabled</td>
+            </tr>
+        }
+    </table>
+    <p>Page: @Model.PageNumber of @Model.PageCount</p>
+    @Html.PagedListPager(Model, page => Url.Action("UserList", "User", new {page })
+        ,PagedListRenderOptions.Classic)
+</div>
+

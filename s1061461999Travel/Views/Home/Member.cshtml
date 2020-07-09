@@ -1,0 +1,220 @@
+﻿@model s1061461999Travel.Models.Member
+@{
+    ViewBag.Title = "Member";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+    bool dataFlag = false;
+    dataFlag = !string.IsNullOrEmpty(ViewBag.Account);
+    DateTime now = DateTime.Now;
+}
+@helper GetDateTimeLocal(DateTime dt) { 
+int month = int.Parse(dt.Month.ToString());
+string sMonth = month > 9 ? "" + month : "0" + month;
+int day = int.Parse(dt.Day.ToString());
+string sDay = day > 9 ? "" + day : "0" + day;
+string sdate = dt.Year + "-" + sMonth + "-" + sDay;
+string sTime = sdate + "T" + (dt.Hour > 9 ? "" + dt.Hour : "0" + dt.Hour) + ":"
+    + (dt.Minute > 9 ? "" + dt.Minute : "0" + dt.Minute);
+    @sTime
+    }
+
+<div class="container text-muted">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>會員註冊-Bootstrap表單<span class="badge badge-danger mx-3">@TempData["Msg"]</span></h2>
+            @using (Html.BeginForm("Member", "Home", FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Account, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Account, 
+                       new { @class = "form-control",@placeholder="請輸入帳號" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Account, string.Empty,
+                           new { @class = "badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Password, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                        @Html.ValidationMessageFor(model => model.Password, string.Empty,
+                           new { @class = "badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Password2, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.PasswordFor(model => model.Password2, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                        @Html.ValidationMessageFor(model => model.Password2, string.Empty,
+                           new { @class = "badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Email, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                        @Html.ValidationMessageFor(model => model.Email, string.Empty,
+                           new { @class = "badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Phone, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                        @Html.ValidationMessageFor(model => model.Phone, string.Empty,
+                           new { @class = "badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.BirthDay, new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.BirthDay, new { @class = "form-control",
+                       type = "datetime-local",@Value=@GetDateTimeLocal(now)})
+                    </div>
+                    <div class="col-sm-2 text-danger">
+                        @Html.ValidationMessageFor(model => model.BirthDay)                       
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("照片", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBox("photo", string.Empty, new { @class = "form-control", type = "file" })
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <input type="submit" class="btn btn-outline-primary" value="送出">
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            }
+        </div>
+    </div>
+    @if (dataFlag)
+    {
+        DateTime birthDay = (DateTime)Model.BirthDay;
+        <div class="row w-75">
+            <div class="col-md-2 bg-danger border-danger">
+                <img src="~/Images/Upload/@Model.Photo" class="img-fluid" />
+            </div>
+            <div class="col-md-5 text-left bg-info text-white">
+                <h2 class="mt-3">@Model.Name</h2>
+                <h4>帳號:@Model.Account</h4>
+                <h4>生日:@birthDay.ToShortDateString()</h4>
+            </div>
+            <div class="col-md-5 text-left bg-warning text-white">
+                <h4 class="mt-3">住址:台北市興隆路三段56號</h4>
+                <h4>電話: @Model.Phone</h4>
+                <h4>Email: @Model.Email</h4>
+            </div>
+        </div>
+        <div class="row w-75">
+            <div class="card w-100 bg-primary text-white">
+                <div class="card-body">
+                    <h2 class="card-title">學歷</h2>
+                    <p class="card-text">
+                        <table class="table table-condensed table-borderless text-white">
+                            <tr>
+                                <td rowspan="2" class="h5">2016-2020</td>
+                                <td>
+                                    <span class="h5">台北市中國科技大學-資管系</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="h5">GPA: 3.66/4.00</span></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" class="h5">2013-2016</td>
+                                <td>
+                                    <span class="h5">台北市大山高中-普通科</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="h5">GPA: 3.86/4.00</span></td>
+                            </tr>
+                        </table>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row w-75">
+            <div class="card bg-success w-100 text-white">
+                <div class="card-body">
+                    <h2 class="card-title">興趣</h2>
+                    <p class="card-text">
+                        <table class="table table-condensed table-borderless">
+                            <tr>
+                                @foreach (var data in Model.Interest)
+                                {
+
+                                    <td class="h5 text-white">@data</td>
+
+                                }
+                            </tr>
+                        </table>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row w-75">
+            <div class="card bg-light w-100 text-muted">
+                <div class="card-body">
+                    <h2 class="card-title">自傳</h2>
+                    <p class="card-text">
+                        自小出生於一個小康家庭，父親是退伍軍人，退休後經營小本生意維生，母親則以
+                        打零工方式貼補家用。家中雖不富裕，卻充滿了和樂的氣氛。父母親對於子女的教
+                        育非常重視，講究言行合一的教育，也常告誡我們做人要懂得飲水思源，這些觀念
+                        都深植在我的價值觀中。身為老大的我，自小就培養了獨立自主的能力，每年寒暑
+                        假工讀的機會除了賺取學費外，也讓我的社會歷練豐富不少。
+                    </p>
+                    <p class="card-text">
+                        畢業後，就進入勞動部勞動力發展署科技客服中心，擔任客服人員。從這份工作中
+                        ，我學會面對各種不同求職者的 call in 電話及應對進退的方法，也體認到熱情
+                        與責任心是做好工作的不二法門。雖然，這是份看似機械性的工作，不富變化性，
+                        但從這份工作中，我成了情報員，因為我是第一線的工作者，了解使用者在操作網
+                        站上的問題，也深切了解求職者的需求。在此期間，我主動報名參與多元行銷術的
+                        課程，充實了不少創意及企劃的能力。
+                    </p>
+                    <p class="card-text">
+                        對未來的生涯規劃方面，目前我希望可以在行銷企劃的工作上有所發揮，可以更了
+                        解市場的需求，進而培養自己的專長及能力，未來可以成為專業的行銷企劃達人。
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+    @section scripts{
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    }
+

@@ -1,0 +1,109 @@
+﻿@model s1061461999Travel.Models.Spot
+@{
+    ViewBag.Title = "AddSpot";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+}
+
+<div class="container text-muted">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center">
+                新增景點:@ViewBag.AreaName
+                <span class="text-danger mx-3">@TempData["Msg"]</span>
+            </h2>
+            @using (Html.BeginForm("AddSpot", "Home", FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group row">
+                    @Html.Label("名稱", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.SpotName, new { @class = "form-control",
+                       @placeholder = "請輸入景點名稱" })
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.SpotName,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("地址", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control",
+                       @placeholder = "請輸入景點地址"})
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("電話", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control",type="tel",
+                       @placeholder = "請輸入景點電話"})
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Telephone,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("區域", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(model => model.AreaId,(IEnumerable<SelectListItem>)ViewBag.Area,
+                       new { @class = "form-control"})
+                    </div>
+                    <div class="col-sm-2">
+                        <h3>
+                            @Html.ValidationMessageFor(model => model.Telephone,string.Empty,
+                           new {@class="badge badge-danger" })
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.Label("介紹", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "8" ,
+                       @placeholder = "請輸入景點介紹"})
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("照片1", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBox("file", string.Empty, new { @class = "form-control", type = "file" })
+                    </div>                 
+                </div>
+                <div class="form-group row">
+                    @Html.Label("照片1說明", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBox("imageDescription",string.Empty, new { @class = "form-control",
+                       @placeholder = "請輸入照片1說明"})
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.Label("照片2", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBox("file", string.Empty, new { @class = "form-control", type = "file" })
+                    </div>                   
+                </div>
+                <div class="form-group row">
+                    @Html.Label("照片2說明", new { @class = "col-sm-2 form-control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBox("imageDescription",string.Empty, new { @class = "form-control",
+                       @placeholder = "請輸入照片2說明"})
+                    </div>
+                </div>               
+                <div class="form-group row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-left">
+                        <input type="submit" class="btn btn-outline-primary" value="送出">
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

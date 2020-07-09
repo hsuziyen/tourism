@@ -1,0 +1,70 @@
+﻿@model s1061461999Travel.Models.ViewModels.ManagerVM
+@{
+    ViewBag.Title = "SpotManager";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+    var areas = Model.Areas;
+    var spots = Model.Spots;
+    var images = Model.Images;
+}
+<div class="container text-center text-muted">
+    <div class="row">
+        <div class="offset-md-2 col-md-8">
+            <div class="accordion m-3" id="accordionExample">
+                @foreach (var data in areas)
+                {
+                    <div class="card">
+                        <div class="card-header bg-light" id="heading-@data.AreaId">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" 
+                                        data-target="#Area-@data.AreaId" aria-expanded="true" 
+                                        aria-controls="collapseOne">
+                                    @data.AreaName
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="Area-@data.AreaId" class="collapse" aria-labelledby="heading-@data.AreaId" 
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <table class="table table-condensed table-bordered">                                   
+                                    @foreach (var spotData in spots)
+                                    {
+                                        if (spotData.AreaId == data.AreaId)
+                                        {
+                                            var imageList = images.Where(o => o.SpotId == spotData.SpotId).ToList();
+                                    <tr>
+                                        @if (imageList.Count > 0)
+                                        {
+                                            <td width="20%;">
+                                                <img src="~/Images/@imageList.ElementAt(0).ImageName" class="img-thumbnail" />
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td>@spotData.SpotName</td>
+                                        <td>@spotData.Address</td>
+                                        <td>
+                                            @Html.ActionLink("修改","EditSpot",
+                                           new { spotData.SpotId }, new { @class = "btn btn-warning text-white" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("刪除","DeleteSpot",
+                                           new { spotData.SpotId }, new { @class = "btn btn-danger",
+                                               onclick ="return confirm('你確定要刪除"+spotData.SpotName+"景點嗎?')" })
+                                        </td>
+                                    </tr>
+                                        }
+                                    }
+                                </table>
+                                @Html.ActionLink("新增", "AddSpot", new { data.AreaId },new{@class="btn btn-primary"})
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

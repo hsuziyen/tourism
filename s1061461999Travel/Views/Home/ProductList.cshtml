@@ -1,0 +1,75 @@
+﻿@model s1061461999Travel.Models.ViewModels.ProductCategoryVM
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+    int i = 0;
+}
+
+@section style{
+    <style>
+        a{
+            display:block;
+            text-decoration:none;
+        }
+            a:hover {
+                text-decoration: none;
+                background-color: #563d7c;
+                color: #ffd800;
+            }
+    </style>
+    }
+<div class="container text-center text-muted">
+    <div class="row">
+        <div class="col-md-2">
+            <h2>&nbsp;</h2>
+            @foreach(var item in Model.Category)
+            {
+                byte[] photo = item.圖片;
+                string imageBase64="";
+                if (photo != null)
+                {
+                    MemoryStream ms = new MemoryStream();
+                    ms.Write(photo, 78, photo.Length - 78);
+                    imageBase64 = Convert.ToBase64String(ms.ToArray());
+                }
+            
+                @*@Html.ActionLink(item.類別名稱, "ProductList", new { CategoryId = item.類別編號 })*@               
+                <a href="~/Home/ProductList?CategoryId=@item.類別編號" class="text-center">
+                    <img src="data:image/jpg;base64,@imageBase64" class="img-thumbnail" />
+                    @item.類別名稱
+                </a>
+           
+            }
+        </div>
+        <div class="col-md-10">
+            <h2><span class="badge badge-success mt-2">@ViewBag.CategoryName </span></h2>
+            <ul class="list-group">                
+                    <li class="list-group-item">
+                        <table class="table table-condensed table-striped">
+                            <tr>
+                                <th>編號</th>
+                                <th>產品</th>
+                                <th>單價</th>
+                                <th>單位數量</th>
+                                <th>庫存量</th>
+                                <th>已訂購量</th>
+                            </tr>
+                            @foreach (var data in Model.Product)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@data.產品</td>
+                                    <td>@data.單價</td>
+                                    <td>@data.單位數量</td>
+                                    <td>@data.庫存量</td>
+                                    <td>@data.已訂購量</td>
+                                </tr>
+                            }
+                        </table>
+                    </li>                   
+            </ul>
+        </div>
+    </div>
+</div>
+

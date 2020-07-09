@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TravelDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="SpotId" Type="int" />
+  </EntityType>
+  <EntityType Name="Spot">
+    <Key>
+      <PropertyRef Name="SpotId" />
+    </Key>
+    <Property Name="SpotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SpotName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="AreaId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Image_Spot">
+    <End Role="Spot" Type="Self.Spot" Multiplicity="0..1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spot">
+        <PropertyRef Name="SpotId" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="SpotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Spot_Area">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="Spot" Type="Self.Spot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="AreaId" />
+      </Principal>
+      <Dependent Role="Spot">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TravelDBModelStoreContainer">
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Spot" EntityType="Self.Spot" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Image_Spot" Association="Self.FK_Image_Spot">
+      <End Role="Spot" EntitySet="Spot" />
+      <End Role="Image" EntitySet="Image" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Spot_Area" Association="Self.FK_Spot_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Spot" EntitySet="Spot" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,79 @@
+﻿@using s1061461999Travel.Models;
+@model s1061461999Travel.Models.ViewModels.SpotAreaVM
+@{
+    ViewBag.Title = "SpotList";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+}
+@section style{
+    <style>
+        a {            
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: none;
+                background-color: #563d7c;
+                color: #ffd800;
+            }
+    </style>
+}
+<div class="container text-center text-muted">
+    <div class="row">
+        <div class="col-md-2">
+            <h2><span >&nbsp; </span></h2>
+
+            @foreach (var data in Model.Areas)
+            {
+                <h4>@Html.ActionLink(data.AreaName, "SpotList", new { AreaId = data.AreaId })</h4>
+            }
+        </div>
+        <div class="col-md-10">
+            <h2><span class="badge badge-success mt-2">@ViewBag.AreaName 景點</span></h2>
+            <ul class="list-group">
+                @foreach (var data in Model.Spots)
+                            {
+                                List<Image> images =
+                            data.Images.Where(o => o.SpotId == data.SpotId).ToList();
+                                int no = images.Count;
+                                if (no > 0)
+                                {
+                                    Random r = new Random();
+                                    int x = r.Next(no);
+                                    string imageName = images.ElementAt(x).ImageName;
+                                    string imgDescription = images.ElementAt(x).Description;
+                                    string description = data.Description.Length > 130 ? 
+                                            data.Description.Substring(0, 130) + "..." : data.Description;
+
+
+                        <li class="list-group-item ">
+                            <div class="row text-left">
+                                <div class="col-md-2">
+                                    <a href="~/Home/SpotShow?SpotId=@data.SpotId">
+                                        <img src="~/Images/@imageName" class="img-thumbnail" />
+                                        <p class="text-center">@data.SpotName</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-10">
+                                    <h5 class="list-group-item-heading text-primary">
+                                        @data.SpotName
+                                        <span class="badge badge-success">Address</span>
+                                        <a href="https://www.google.com.tw/maps/place/@data.Address" target="_blank">
+                                            @data.Address
+                                        </a>
+                                        <span class="badge badge-success">Tel</span>
+                                        @data.Telephone                                        
+                                        <a href="https://www.google.com/maps/dir/台北市興隆路三段56號/@data.Address" target="_blank">
+                                            <span class="badge badge-primary">導航</span>
+                                        </a>
+                                    </h5>
+                                    <p class="text-left">@description</p>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+

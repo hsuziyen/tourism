@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "DemoInput";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+}
+@section style{
+    <style>
+        ul {
+            list-style: none;           
+        }
+        li>a:hover {
+            text-decoration:none;
+            display: block;
+            width:50%;
+            background-color: #563d7c;
+            color: #ffd800;
+        }
+    </style>
+    }
+<div class="container">
+    <div class="row text-muted">
+        <h2>TempData</h2>
+        <div class="offset-md-2 col-md-10">
+            <form action="~/Home/CheckInput" method="post">
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">姓名</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="請輸入姓名">
+                    </div>
+                    <div class="col-md-4">
+                        <h2><span class="badge badge-danger">@TempData["Msg2"]</span></h2>
+                    </div>
+                    
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-6">
+                        <input type="submit" class="btn btn-primary" value="Send">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-2">
+            @*<form action="~/Home/CheckInput">*@
+            @using (Html.BeginForm("CheckInput", "Home"))
+            {
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control w-50" id="name"
+                           name="name" placeholder="請輸入姓名">
+                    <h2><span class="badge badge-danger">@TempData["Msg"]</span></h2>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="form-control w-25" value="Send" />
+                </div>
+            }
+            @*</form>*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <ul>
+                <li><a href="~/Home/DemoQueryString/?id=1&name=王小明&score=90">QueryString</a></li>
+                <li>@Html.ActionLink("TempData", "DemoInput")</li>
+                <li>
+                    @Html.ActionLink("RouteData","DemoRouteData",new
+                {id=2,name="李大仁",score=88})
+                </li>
+            </ul>
+        </div>
+    </div>    
+</div>
+
+

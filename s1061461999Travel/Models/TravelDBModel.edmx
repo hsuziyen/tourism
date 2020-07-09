@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TravelDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="SpotId" Type="int" />
+        </EntityType>
+        <EntityType Name="Spot">
+          <Key>
+            <PropertyRef Name="SpotId" />
+          </Key>
+          <Property Name="SpotId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpotName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="AreaId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Image_Spot">
+          <End Role="Spot" Type="Self.Spot" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spot">
+              <PropertyRef Name="SpotId" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="SpotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spot_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Spot" Type="Self.Spot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="Spot">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelDBModelStoreContainer">
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spot" EntityType="Self.Spot" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Image_Spot" Association="Self.FK_Image_Spot">
+            <End Role="Spot" EntitySet="Spot" />
+            <End Role="Image" EntitySet="Image" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spot_Area" Association="Self.FK_Spot_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Spot" EntitySet="Spot" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TravelDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Spots" Relationship="Self.FK_Spot_Area" FromRole="Area" ToRole="Spot" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SpotId" Type="Int32" />
+          <NavigationProperty Name="Spot" Relationship="Self.FK_Image_Spot" FromRole="Image" ToRole="Spot" />
+        </EntityType>
+        <EntityType Name="Spot">
+          <Key>
+            <PropertyRef Name="SpotId" />
+          </Key>
+          <Property Name="SpotId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpotName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_Spot_Area" FromRole="Spot" ToRole="Area" />
+          <NavigationProperty Name="Images" Relationship="Self.FK_Image_Spot" FromRole="Spot" ToRole="Image" />
+        </EntityType>
+        <Association Name="FK_Spot_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Spot" Type="Self.Spot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="Spot">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_Spot">
+          <End Role="Spot" Type="Self.Spot" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spot">
+              <PropertyRef Name="SpotId" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="SpotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="Spots" EntityType="Self.Spot" />
+          <AssociationSet Name="FK_Spot_Area" Association="Self.FK_Spot_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="Spot" EntitySet="Spots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Spot" Association="Self.FK_Image_Spot">
+            <End Role="Spot" EntitySet="Spots" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TravelDBModelStoreContainer" CdmEntityContainer="TravelDBEntities">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="TravelDBModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="TravelDBModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SpotId" ColumnName="SpotId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spots">
+            <EntityTypeMapping TypeName="TravelDBModel.Spot">
+              <MappingFragment StoreEntitySet="Spot">
+                <ScalarProperty Name="SpotId" ColumnName="SpotId" />
+                <ScalarProperty Name="SpotName" ColumnName="SpotName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

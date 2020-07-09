@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewBag.Title = "MemberApply";
+    Layout = "~/Views/Shared/_TravelLayout.cshtml";
+
+    bool dataFlag = false;
+    dataFlag = !string.IsNullOrEmpty(ViewBag.account);
+}
+
+<div class="container text-muted">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>會員註冊-Bootstrap表單</h2>
+            @using (Html.BeginForm("MemberApplyClass", "Home", FormMethod.Post))
+            {
+                <div class="form-group row">
+                    <label for="Account" class="col-sm-2 col-form-label">帳號</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control is-valid" id="Account"
+                               name="Account" placeholder="Account" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control is-invalid" id="Password"
+                             name="Password"  placeholder="Password" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Name" class="col-sm-2 col-form-label">姓名</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="Name"
+                                name="Name" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="Email"
+                               name="Email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Phone" class="col-sm-2 col-form-label">手機</label>
+                    <div class="col-sm-8">
+                        <input type="tel" class="form-control" id="Phone"
+                               name="Phone" placeholder="0988123456">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="Edu">學歷</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="Edu" name="Edu">
+                            <option>高中</option>
+                            <option selected>大學</option>
+                            <option>研究所</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="Interest">興趣</label>
+                    <div class="col-sm-8 custom-control custom-checkbox">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Interest0"
+                                   name="Interest" value="路跑">
+                            <label class="form-check-label" for="Interest0">路跑</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="Interest1"
+                                   name="Interest" value="打球">
+                            <label class="custom-control-label" for="Interest1">打球</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="Interest2"
+                                   name="Interest" value="彈琴">
+                            <label class="custom-control-label" for="Interest2">彈琴</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="Interest3"
+                                   name="Interest" value="旅行">
+                            <label class="custom-control-label" for="Interest3">旅行</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">                  
+                    <div class="offset-sm-2 col-sm-8">
+                        <input type="submit" class="btn btn-outline-primary" value="送出">
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+    
+
+
+    @*<div class="col-md-8 offset-md-2">
+            <h2>會員註冊</h2>
+            <form action="~/Home/MemberApplyClass" method="post">
+                <table class="table table-condensed">
+                    <tr>
+                        <td>帳號：</td>
+                        <td>
+                            <input type="text" name="account" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密碼：</td>
+                        <td>
+                            <input type="password" name="password" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>姓名：</td>
+                        <td>
+                            <input type="text" name="name" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>email：</td>
+                        <td>
+                            <input type="email" name="email" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>手機：</td>
+                        <td>
+                            <input type="tel" name="phone" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>學歷：</td>
+                        <td>
+                            <select name="edu">
+                                <option>高中</option>
+                                <option selected>大學</option>
+                                <option>碩士</option>
+                                <option>博士</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>興趣：</td>
+                        <td>
+                            <input type="checkbox" name="interest" value="打球" />打球
+                            <input type="checkbox" name="interest" value="音樂" />音樂
+                            <input type="checkbox" name="interest" value="攝影" />攝影
+                            <input type="checkbox" name="interest" value="旅行" checked />旅行
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Send" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>*@
+    @if (dataFlag)
+    {
+        <h2>註冊資料如下:</h2>
+        <table class="table table-condensed">
+            <tr>
+                <td>帳號:</td>
+                <td>
+                    @ViewBag.account
+                </td>
+            </tr>
+            <tr>
+                <td>密碼:</td>
+                <td>
+                    @ViewBag.password
+                </td>
+            </tr>
+            <tr>
+                <td>姓名:</td>
+                <td>
+                    @ViewBag.name
+                </td>
+            </tr>
+            <tr>
+                <td>email:</td>
+                <td>
+                    @ViewBag.email
+                </td>
+            </tr>
+            <tr>
+                <td>手機:</td>
+                <td>
+                    @ViewBag.phone
+                </td>
+            </tr>
+            <tr>
+                <td>學歷</td>
+                <td>
+                    @ViewBag.edu
+                </td>
+            </tr>
+            <tr>
+                <td>興趣</td>
+                <td>
+                    @foreach (var data in ViewBag.interest)
+                    {
+                        <span>@data</span>
+                    }
+                </td>
+            </tr>
+        </table>
+
+    }
+</div>
